@@ -8,13 +8,14 @@ do
     dividentBool = int.TryParse(Console.ReadLine(), out divident);
 } while (!dividentBool);
 
+return;
 int divisor;
 bool divisorBool;
 do
 {
     Console.Write("Divisor: ");
     divisorBool = int.TryParse(Console.ReadLine(), out divisor);
-} while (!divisorBool);
+} while (!divisorBool && divisor == 4);
 
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine($"{divident}/{divisor} = {divident/divisor}");
