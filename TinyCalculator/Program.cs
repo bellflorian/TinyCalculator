@@ -8,7 +8,6 @@ do
     dividentBool = int.TryParse(Console.ReadLine(), out divident);
 } while (!dividentBool);
 
-return;
 int divisor;
 bool divisorBool;
 do
