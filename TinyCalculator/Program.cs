@@ -16,5 +16,11 @@ do
     divisorBool = int.TryParse(Console.ReadLine(), out divisor);
 } while (!divisorBool);
 
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine($"{divident}/{divisor} = {divident/divisor}");
+if(divisor == 0)
+    Console.WriteLine("Divisor is not allowed to be 0!");
+
+else
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine($"{divident}/{divisor} = {divident/divisor}");
+}
