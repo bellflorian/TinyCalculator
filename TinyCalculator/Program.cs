@@ -1,10 +1,24 @@
 ﻿Console.WriteLine("== Tiny Calculator ==");
 
-int divident = GetInt("Divident", false);
-int divisor = GetInt("Divisor", true);
+bool first = true;
+int divident = 0;
+do
+{
+    Console.WriteLine();
+    if (first)
+    {
+        divident = GetInt("Divident", false);
+    }
+    first = false;
+    int divisor = GetInt("Divisor", true);
+    int result = divident / divisor;
+    Console.WriteLine($"{divident}/{divisor} = {result}");
+    Console.Write("Continue? [Y]: ");
+    divident = result;
+} while (Console.ReadKey().KeyChar == 'Y');
 
-Console.ForegroundColor = ConsoleColor.Cyan;
-Console.WriteLine($"{divident}/{divisor} = {divident/divisor}");
+
+
 
 static int GetInt(string name, bool isDivisor)
 {
@@ -24,5 +38,6 @@ static int GetInt(string name, bool isDivisor)
             isInt = false;
         }
     } while (!isInt);
+    Console.ResetColor();
     return number;
 }
