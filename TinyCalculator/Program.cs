@@ -1,28 +1,43 @@
-﻿Console.WriteLine("== Tiny Calculator ==");
+﻿using Microsoft.VisualBasic;
 
-char calcTyp = GetCalcType();
+Console.WriteLine("== Tiny Calculator ==");
 
+bool first = true;
+double num01 = 0;
+double num02 = 0;
 
-double num01 = GetInt("Number 1", false);
-double num02;
-if (calcTyp == '/')
-    num02 = GetInt("Number 2", true);
-
-else
-    num02 = GetInt("Number 2", false);
-
-double result;
-
-switch(calcTyp)
+do
 {
-    case '+': result = num01 + num02; break;
-    case '-': result = num01 - num02; break;
-    case '*': result = num01 * num02; break;
-    case '/': result = num01 / num02; break;
-    default: result = 0; break;
-}
+    Console.WriteLine();
 
-Console.WriteLine($"{num01}{calcTyp}{num02}={result}");
+    char calcType = GetCalcType();
+    if(first)
+        num01 = GetDouble("Number 1", false);
+
+    first = false;
+
+    if (calcType == '/')
+        num02 = GetDouble("Number 2", true);
+
+    else
+        num02 = GetDouble("Number 2", false);
+
+    double result;
+
+    switch (calcType)
+    {
+        case '+': result = num01 + num02; break;
+        case '-': result = num01 - num02; break;
+        case '*': result = num01 * num02; break;
+        case '/': result = num01 / num02; break;
+        default: result = 0; break;
+    }
+
+    Console.WriteLine($"{num01}{calcType}{num02}={result}");
+    Console.Write("Continue? [Y]: ");
+    num01 = result;
+} while (Console.ReadKey().KeyChar == 'Y');
+
 
 char GetCalcType()
 {
@@ -34,7 +49,7 @@ char GetCalcType()
     } while (userInput != "*" && userInput != "/" && userInput !="+" && userInput !="-");
     return Char.Parse(userInput);
 }
-static double GetInt(string name, bool isDivisor)
+static double GetDouble(string name, bool isDivisor)
 {
     double number;
     bool isInt;
