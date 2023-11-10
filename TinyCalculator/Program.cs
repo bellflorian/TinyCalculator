@@ -1,20 +1,48 @@
 ﻿Console.WriteLine("== Tiny Calculator ==");
 
-int divident = GetInt("Divident", false);
-int divisor = GetInt("Divisor", true);
+char calcTyp = GetCalcType();
 
-Console.ForegroundColor = ConsoleColor.Cyan;
-Console.WriteLine($"{divident}/{divisor} = {divident/divisor}");
 
-static int GetInt(string name, bool isDivisor)
+double num01 = GetInt("Number 1", false);
+double num02;
+if (calcTyp == '/')
+    num02 = GetInt("Number 2", true);
+
+else
+    num02 = GetInt("Number 2", false);
+
+double result;
+
+switch(calcTyp)
 {
-    int number;
+    case '+': result = num01 + num02; break;
+    case '-': result = num01 - num02; break;
+    case '*': result = num01 * num02; break;
+    case '/': result = num01 / num02; break;
+    default: result = 0; break;
+}
+
+Console.WriteLine($"{num01}{calcTyp}{num02}={result}");
+
+char GetCalcType()
+{
+    string userInput;
+    do
+    {
+        Console.Write("Enter Calculation Type [*|/|+|-]: ");
+        userInput = Console.ReadLine();
+    } while (userInput != "*" && userInput != "/" && userInput !="+" && userInput !="-");
+    return Char.Parse(userInput);
+}
+static double GetInt(string name, bool isDivisor)
+{
+    double number;
     bool isInt;
     do
     {
         Console.ResetColor();
         Console.Write($"{name}: ");
-        isInt = int.TryParse(Console.ReadLine(), out number);
+        isInt = double.TryParse(Console.ReadLine(), out number);
         Console.ForegroundColor = ConsoleColor.Red;
         if (!isInt)
             Console.WriteLine($"{name} has to be a number!");
@@ -24,5 +52,6 @@ static int GetInt(string name, bool isDivisor)
             isInt = false;
         }
     } while (!isInt);
+    Console.ResetColor();
     return number;
 }
